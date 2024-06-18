@@ -1,27 +1,46 @@
 <?php
 require '../../model/config.php';
 
+$sql = "SELECT id, name FROM `questions`;";
+$stmt = $conn->prepare($sql);
+$stmt->execute();
+$result = $stmt->get_result();
+// $questions = $result->fetch_assoc();
+
+
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
-    if (isset($_POST["name"]) && isset($_POST["description"])) {
-        $name = $_POST["name"];
-        $description = $_POST["description"];
-        // Préparer la requête SQL
+    $name = $_POST["name"];
+    $description = $_POST["description"];
+    $questions = $_POST['question'] ?? [];
+
+    $conn->begin_transaction();
+
+    try {
+        // Préparer la requête SQL pour insérer le quiz
         $sql = "INSERT INTO `quizzes`(`name`, `description`) VALUES (?, ?)";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("ss", $name, $description);
+        $stmt->execute();
 
-        // Exécuter la requête
-        if ($stmt->execute()) {
-            echo "Nouveau quiz créé avec succès";
-        } else {
-            echo "Execute failed: " . $stmt->error;
+        // Récupérer l'identifiant du dernier quiz inséré
+        $quizId = $conn->insert_id;
+
+        // Préparer la requête SQL pour lier les questions au quiz
+        $sql_question = "INSERT INTO quiz_questions (question_id, quiz_id) VALUES (?, ?)";
+        $stmt_question = $conn->prepare($sql_question);
+
+        foreach ($questions as $question) {
+            $stmt_question->bind_param("ii", $question, $quizId);
+            $stmt_question->execute();
         }
-        // Fermer la requête
-        $stmt->close();
-    } else {
-        echo "Name or Description not set in POST data.";
+
+        $conn->commit();
+
+        // Rediriger l'utilisateur vers la page du quiz créé
+        header("");
+        exit;
+    } catch (PDOException $e) {
+        $conn->rollback();
+        echo "Erreur : " . $e->getMessage();
     }
 }
-
-// Fermer la connexion
-$conn->close();

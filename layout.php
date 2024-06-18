@@ -18,8 +18,11 @@
             <header class="mb-4">
                 <h1 class="text-3xl font-bold">creation de quiz</h1>
                 <nav>
-                    <a href="./index.php" class="text-blue-500 hover:underline ml-4 p-2">Liste des Quiz</a>
-                    <a href="./app/view/quizzes/form_add_quizzes.php" class="text-blue-500 hover:underline">cree un quizz</a>
+                    <a href="/quiz/index.php" class="text-blue-500 hover:underline ml-4 p-2">Acceuil</a>
+                    <a href="/quiz/app/view/quizzes/index_quizzes.php" class="text-blue-500 hover:underline ml-4 p-2">Liste des Quiz</a>
+                    <a href="/quiz/app/view/quizzes/form_add_quizzes.php" class="text-blue-500 hover:underline">cree un quizz</a>
+                    <a href="/quiz/app/view/questions/index_questions.php" class="text-blue-500 hover:underline">Liste des questions</a>
+                    <a href="/quiz/app/view/questions/form_add_questions.php" class="text-blue-500 hover:underline">Ajouter une question</a>
 
 
                 </nav>

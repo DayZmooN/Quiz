@@ -44,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
 
         // Rediriger l'utilisateur vers la page du quiz créé
-        header("Location: ../../view/create_quizzes/form_add_quizzes.php");
+        header("Location: ../../view/quizzes/form_add_quizzes.php");
         exit;
     } catch (PDOException $e) {
         $conn->rollback();

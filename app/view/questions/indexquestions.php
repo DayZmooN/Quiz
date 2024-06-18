@@ -3,6 +3,7 @@ ob_start();
 require_once '../../model/config.php';
 require_once '../../model/questions/read.php';
 ?>
+<a href="./form_add_questions.php" class="btn btn-primary">Add Question</a>
 <?php if (!empty($questions)) { ?>
     <table class="table table-striped">
         <thead>
@@ -29,5 +30,6 @@ require_once '../../model/questions/read.php';
 <?php } ?>
 
 <?php
+$title = "Questions";
 $content = ob_get_clean();
 require '../../../layout.php';

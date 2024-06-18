@@ -22,6 +22,7 @@ require_once '../../model/questions/read.php';
                     <td><?php echo $question['category_name']; ?></td>
                     <td>
                         <a href="./form_update_questions.php?id=<?php echo $question['id']; ?>" class="btn btn-warning">Edit</a>
+                        <a href="../../model/questions/delete.php?id=<?php echo $question['id']; ?>" class="btn btn-danger">Delete</a>
                     </td>
                 </tr>
 

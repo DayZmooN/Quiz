@@ -10,8 +10,12 @@ require '../../model/quizzes/read.php';
             <h5 class="card-title"></h5>
             <h6 class="card-subtitle mb-2 text-muted"><?= htmlspecialchars($quiz['name']) ?></h6>
             <p class="card-text"><?= htmlspecialchars($quiz['description']) ?></p>
-            <a href="./app/view/quizzes/form_edit_quizzes.php?id=<?= $quiz['id'] ?>" class="card-link">edit</a>
-            <a href="#" class="card-link">delete</a>
+            <a href="/quiz/app/view/quizzes/form_edit_quizzes.php?id=<?= $quiz['id'] ?>" class="card-link">edit</a>
+            <form action="../../model/quizzes/delete.php" method="post">
+                <input type="hidden" name="id" value="<?= htmlspecialchars($quiz['id']) ?>">
+                <button type="submit" class="card-link">Delete</button>
+            </form>
+
         </div>
     </div>
 <?php endwhile; ?>

@@ -13,7 +13,7 @@
 
 
 <body class="bg-gray-100 h-screen ">
-    <main>
+    <main class="container">
         <div class="container mx-auto p-4">
             <header class="mb-4">
                 <h1 class="text-3xl font-bold">creation de quiz</h1>
@@ -23,19 +23,11 @@
                     <a href="/quiz/app/view/quizzes/form_add_quizzes.php" class="text-blue-500 hover:underline">cree un quizz</a>
                     <a href="/quiz/app/view/questions/index_questions.php" class="text-blue-500 hover:underline">Liste des questions</a>
                     <a href="/quiz/app/view/questions/form_add_questions.php" class="text-blue-500 hover:underline">Ajouter une question</a>
-
-
                 </nav>
             </header>
         </div>
-
         <?php echo $content ?>
-
-
     </main>
-
-
 </body>
-
 
 </html>

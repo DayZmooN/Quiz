@@ -3,6 +3,7 @@ ob_start();
 require '../../model/quizzes/create.php';
 ?>
 
+
 <div class="container mt-5">
     <h2 class="mb-4">Créer un quiz</h2>
     <form action="../../model/quizzes/create.php" method="post" class="bg-light p-4 shadow-sm rounded">
@@ -11,11 +12,15 @@ require '../../model/quizzes/create.php';
             <input type="text" class="form-control" id="name" name="name" placeholder="Entrez le nom du quiz" required>
         </div>
         <div>
-            <label for="roles">questions :</label>
+            <label for="questions">Questions :</label>
             <div>
                 <?php while ($question = $result->fetch_assoc()) : ?>
                     <div class="flex items-center mb-4">
-                        <input type="checkbox" id="role_<?= $question['id'] ?>" name="questions[]" value="<?= $question['id'] ?>" <?= $question['id']  ?>>
+
+
+                        <input type="checkbox" id="question_<?= $question['id'] ?>" name="questions[]" value="<?= $question['id'] ?>">
+
+
                         <label for="question_<?= $question['id'] ?>" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"><?= $question['name'] ?></label>
                     </div>
                 <?php endwhile; ?>
@@ -29,8 +34,8 @@ require '../../model/quizzes/create.php';
     </form>
 </div>
 
+
 <?php
 $title = "Créer un quiz";
 $content = ob_get_clean();
 require '../../../layout.php';
-?>

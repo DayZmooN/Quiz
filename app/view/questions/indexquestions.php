@@ -11,6 +11,7 @@ require_once '../../model/questions/read.php';
                 <th scope="col">Name</th>
                 <th scope="col">Difficulty</th>
                 <th scope="col">Category Name</th>
+                <th scope="col">Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -19,7 +20,11 @@ require_once '../../model/questions/read.php';
                     <td><?php echo $question['name']; ?></td>
                     <td><?php echo $question['difficulty']; ?></td>
                     <td><?php echo $question['category_name']; ?></td>
+                    <td>
+                        <a href="./form_update_questions.php?id=<?php echo $question['id']; ?>" class="btn btn-warning">Edit</a>
+                    </td>
                 </tr>
+
             <?php endforeach; ?>
         </tbody>
     </table>

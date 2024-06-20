@@ -15,8 +15,9 @@ require '../../model/quizzes/read.php';
                 <input type="hidden" name="id" value="<?= htmlspecialchars($quiz['id']) ?>">
                 <button type="submit" class="card-link">Delete</button>
             </form>
-
+            <a href="/quiz/app/view/game/game.php?id=<?= $quiz['id'] ?>" class="btn btn-primary">Commencer le quiz</a>
         </div>
+    </div>
     </div>
 <?php endwhile; ?>
 

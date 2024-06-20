@@ -1,5 +1,7 @@
 let currentQuestionIndex = 0;
 let quizDetails = [];
+let compteurGood = 0;
+
 // Requête pour récupérer tous les quiz par id
 async function fetchQuiz() {
   try {
@@ -71,11 +73,13 @@ function showQuestion(index) {
           // Ajoutez ici le code pour gérer une bonne réponse
           listItem.style.backgroundColor = "green";
           listItem.style.color = "white";
+          compteurGood++;
         } else {
           // Ajoutez ici le code pour gérer une mauvaise réponse
           listItem.style.backgroundColor = "red";
           listItem.style.color = "white";
         }
+        document.getElementById("score").textContent = compteurGood;
         setTimeout(() => {
           currentQuestionIndex++;
           if (currentQuestionIndex < quizDetails.length) {

@@ -14,10 +14,12 @@ $row = $result->fetch_assoc();
 ?>
 
 <div id="quiz-container">
-
-
     <input class="quiz-id" type="hidden" data-id="<?= $row['id'] ?>">
-
+</div>
+<div class="container">
+    <div class="score">
+        <p>Score : <span id="score">0</span></p>
+    </div>
 </div>
 
 <?php

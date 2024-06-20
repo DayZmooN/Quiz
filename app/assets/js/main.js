@@ -1,5 +1,7 @@
 let currentQuestionIndex = 0;
 let quizDetails = [];
+let compteurGood = 0;
+
 // Requête pour récupérer tous les quiz par id
 async function fetchQuiz() {
   try {
@@ -69,17 +71,19 @@ function showQuestion(index) {
           // Ajoutez ici le code pour gérer une bonne réponse
           listItem.style.backgroundColor = "green";
           listItem.style.color = "white";
+          compteurGood++;
         } else {
           // Ajoutez ici le code pour gérer une mauvaise réponse
           listItem.style.backgroundColor = "red";
           listItem.style.color = "white";
         }
+        document.getElementById("score").textContent = compteurGood;
         setTimeout(() => {
           currentQuestionIndex++;
           if (currentQuestionIndex < quizDetails.length) {
             showQuestion(currentQuestionIndex);
           } else {
-            alert("Vous avez terminé le quiz !");
+            endQuiz();
           }
         }, 300);
       });
@@ -104,6 +108,11 @@ async function checkAnswer(questionId) {
     console.error("Erreur lors de la vérification de la réponse :", error);
     return false; // En cas d'erreur, considérer la réponse comme incorrecte
   }
+}
+
+function endQuiz() {
+  const quizContainer = document.querySelector("#quiz-container");
+  quizContainer.innerHTML = "";
 }
 
 // Attendre que le DOM soit chargé pour exécuter fetchQuiz

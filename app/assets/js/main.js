@@ -1,6 +1,7 @@
 let currentQuestionIndex = 0;
 let quizDetails = [];
 let compteurGood = 0;
+let timer; // Déclarer timer ici pour le rendre accessible globalement
 
 // Requête pour récupérer tous les quiz par id
 async function fetchQuiz() {
@@ -31,7 +32,6 @@ async function fetchQuiz() {
 
         console.log("Quiz détails:", quizResult);
 
-        // Appeler la fonction pour afficher les détails du quiz
         // Stocker les détails du quiz
         quizDetails = quizResult;
         showQuestion(currentQuestionIndex);
@@ -54,7 +54,6 @@ function showQuestion(index) {
   quizContainer.innerHTML = "";
   if (quizDetails.length > 0) {
     const question = quizDetails[index];
-    console.log(question);
     const questionTitle = document.createElement("h2");
     questionTitle.textContent = question.name;
     quizContainer.appendChild(questionTitle);
@@ -92,6 +91,7 @@ function showQuestion(index) {
 
       quizContainer.appendChild(listItem);
     });
+
     // Démarre le minuteur pour cette question
     const timeLimitInSeconds = 20; // Temps limite en secondes par question
     const timerElement = document.createElement("div");
@@ -103,7 +103,6 @@ function showQuestion(index) {
 // Fonction pour vérifier la réponse sélectionnée par l'utilisateur
 async function checkAnswer(questionId) {
   try {
-    console.log(questionId);
     const response = await fetch(
       `/quiz/app/model/game/fetch_question_reponse.php?id=${questionId}`
     );
@@ -128,7 +127,7 @@ function startTimer(timeLimitInSeconds, timerElement) {
   timerElement.textContent = `Temps restant: ${timeRemaining}s`;
 
   // Démarre l'intervalle pour le minuteur
-  let timer = setInterval(() => {
+  timer = setInterval(() => {
     timeRemaining--;
     timerElement.textContent = `Temps restant: ${timeRemaining}s`;
 

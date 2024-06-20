@@ -28,6 +28,10 @@
         </div>
         <?php echo $content ?>
     </main>
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="/quiz/app/assets/js/main.js"></script>
 </body>
 
 </html>

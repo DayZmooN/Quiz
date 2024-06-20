@@ -65,6 +65,8 @@ function showQuestion(index) {
       listItem.textContent = option;
       listItem.addEventListener("click", async () => {
         const answer = await checkAnswer(question.question_id);
+        clearTimeout(timer); // Arrête le minuteur si une réponse est sélectionnée
+
         if (index + 1 == answer) {
           // Ajoutez ici le code pour gérer une bonne réponse
           listItem.style.backgroundColor = "green";
@@ -79,13 +81,18 @@ function showQuestion(index) {
           if (currentQuestionIndex < quizDetails.length) {
             showQuestion(currentQuestionIndex);
           } else {
-            alert("Vous avez terminé le quiz !");
+            endQuiz();
           }
         }, 300);
       });
 
       quizContainer.appendChild(listItem);
     });
+    // Démarre le minuteur pour cette question
+    const timeLimitInSeconds = 20; // Temps limite en secondes par question
+    const timerElement = document.createElement("div");
+    quizContainer.appendChild(timerElement);
+    startTimer(timeLimitInSeconds, timerElement);
   }
 }
 
@@ -104,6 +111,38 @@ async function checkAnswer(questionId) {
     console.error("Erreur lors de la vérification de la réponse :", error);
     return false; // En cas d'erreur, considérer la réponse comme incorrecte
   }
+}
+
+function endQuiz() {
+  const quizContainer = document.querySelector("#quiz-container");
+  quizContainer.innerHTML = "";
+}
+
+// Fonction pour démarrer le minuteur
+function startTimer(timeLimitInSeconds, timerElement) {
+  let timeRemaining = timeLimitInSeconds;
+  timerElement.textContent = `Temps restant: ${timeRemaining}s`;
+
+  // Démarre l'intervalle pour le minuteur
+  let timer = setInterval(() => {
+    timeRemaining--;
+    timerElement.textContent = `Temps restant: ${timeRemaining}s`;
+
+    // Vérifie si le temps est écoulé
+    if (timeRemaining <= 0) {
+      clearInterval(timer); // Arrête le minuteur
+
+      // Logique à exécuter lorsque le temps est écoulé
+
+      // Passe à la question suivante
+      currentQuestionIndex++;
+      if (currentQuestionIndex < quizDetails.length) {
+        showQuestion(currentQuestionIndex);
+      } else {
+        alert("Vous avez terminé le quiz !");
+      }
+    }
+  }, 1000); // Intervalle d'une seconde (1000 ms)
 }
 
 // Attendre que le DOM soit chargé pour exécuter fetchQuiz
